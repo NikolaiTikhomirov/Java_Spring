@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 @Component
 public class StudentRepository {
     private List<Student> students;
@@ -18,8 +17,6 @@ public class StudentRepository {
         students.add(new Student("Andrey", "dev"));
         students.add(new Student("Alexey", "manager"));
         students.add(new Student("Apolagey", "dev"));
-
-
     }
 
     public List<Student> getAll () {

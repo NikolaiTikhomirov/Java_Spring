@@ -1,14 +1,14 @@
 package gb.homework2.sb;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.aop.scope.ScopedObject;
+import org.springframework.aop.scope.ScopedProxyFactoryBean;
+import org.springframework.context.annotation.*;
 
 @Configuration
 public class ApplicationConfiguration {
     @Bean
-    StudentRepository myStudentRepository () {
+    @Scope("Singleton")
+    StudentRepository StudentRepository () {
         return new StudentRepository();
     }
-
-
 }
