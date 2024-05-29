@@ -3,6 +3,7 @@ package ru.gb.springdemo.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 import ru.gb.springdemo.api.IssueRequest;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.repository.BookRepository;
@@ -23,6 +24,9 @@ public class IssueService {
   private final ReaderRepository readerRepository;
   private final IssueRepository issueRepository;
 
+  @Value("${application.max-allowed-books}")
+  private int maxAllowedBooks;
+
   public Issue issue(IssueRequest request) {
     if (bookRepository.getBookById(request.getBookId()) == null) {
       log.info("Не найдена книга с идентификатором \"" + request.getBookId() + "\"");
@@ -33,10 +37,10 @@ public class IssueService {
       throw new NoSuchElementException("Не найден читатель с идентификатором \"" + request.getReaderId() + "\"");
     }
     // можно проверить, что у читателя нет книг на руках (или его лимит не превышает в Х книг)
-    if (issueRepository.containsUserById(request.getReaderId())) {
-      log.info("У читателя уже есть книга на руках");
+    if (issueRepository.getAllIssuesByReaderId(request.getReaderId()).size() >= maxAllowedBooks) {
+      log.info("У читателя уже достаточно книг на руках");
 //      return issueRepository.getIssueByReaderId(request.getReaderId());
-      throw new ReaderAlreadyHasBookException("У читателя уже есть книга на руках");
+      throw new ReaderAlreadyHasBookException("У читателя уже достаточно книг на руках");
     }
 
     Issue issue = new Issue(request.getBookId(), request.getReaderId());
