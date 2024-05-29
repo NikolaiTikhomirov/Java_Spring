@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.service.IssueService;
+import ru.gb.springdemo.service.ReaderAlreadyHasBookException;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -32,9 +34,25 @@ public class IssueController {
       issue = service.issue(request);
     } catch (NoSuchElementException e) {
       return ResponseEntity.notFound().build();
+    } catch (ReaderAlreadyHasBookException e) {
+      return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
+    return ResponseEntity.status(HttpStatus.OK).body(issue);
+  }
 
-    return ResponseEntity.status(HttpStatus.CONFLICT).body(issue);
+  @GetMapping("{id}")
+  public Issue getIssueById (@PathVariable Long id) {
+    return service.getIssueById(id);
+  }
+
+  @GetMapping
+  public List<Issue> getAllIssues () {
+    return service.getAllIssues();
+  }
+
+  @PutMapping("{issueId}")
+  public void returnBook (@PathVariable Long issueId) {
+    service.returnBook(issueId);
   }
 
 }

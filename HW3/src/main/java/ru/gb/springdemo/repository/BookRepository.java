@@ -32,4 +32,16 @@ public class BookRepository {
       .orElse(null);
   }
 
+  public void addBook (String name) {
+    books.add(new Book(name));
+  }
+
+  public List<Book> getAllBooks () {
+    return List.copyOf(books);
+  }
+
+  public void deleteBookById (Long id) {
+    books.remove(getBookById(id));
+  }
+
 }
