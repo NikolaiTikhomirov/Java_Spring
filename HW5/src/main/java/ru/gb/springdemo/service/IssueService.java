@@ -2,6 +2,7 @@ package ru.gb.springdemo.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import ru.gb.springdemo.api.IssueRequest;
@@ -13,6 +14,7 @@ import ru.gb.springdemo.repository.ReaderRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -48,8 +50,10 @@ public class IssueService {
     return issue;
   }
 
-  public Issue getIssueById (Long id) {
-    return issueRepository.getIssueById(id);
+  public ResponseEntity<Issue> getIssueById (Long id) {
+    Optional<Issue> issue = issueRepository.findById(id);
+    return issue.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+//    return issueRepository.getIssueById(id);
   }
 
   public List<Issue> getAllIssues () {
@@ -57,7 +61,7 @@ public class IssueService {
   }
 
   public void returnBook (Long id) {
-    Issue issue = getIssueById(id);
+    Issue issue = getIssueById(id).getBody();
     issue.setReturnedAt(LocalDateTime.now());
     issueRepository.save(issue);
   }

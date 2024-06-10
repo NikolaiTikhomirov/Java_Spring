@@ -20,11 +20,6 @@ public class IssueController {
   @Autowired
   private IssueService service;
 
-//  @PutMapping
-//  public void returnBook(long issueId) {
-//    // найти в репозитории выдачу и проставить ей returned_at
-//  }
-
   @PostMapping
   public ResponseEntity<Issue> issueBook(@RequestBody IssueRequest request) {
     log.info("Получен запрос на выдачу: readerId = {}, bookId = {}", request.getReaderId(), request.getBookId());
@@ -42,7 +37,7 @@ public class IssueController {
 
   @GetMapping("{id}")
   public Issue getIssueById (@PathVariable Long id) {
-    return service.getIssueById(id);
+    return service.getIssueById(id).getBody();
   }
 
   @GetMapping
