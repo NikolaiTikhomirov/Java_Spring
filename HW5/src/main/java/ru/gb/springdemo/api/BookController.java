@@ -1,6 +1,5 @@
 package ru.gb.springdemo.api;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Book;
@@ -21,16 +20,16 @@ public class BookController {
 
     @GetMapping()
     public List<Book> getAllBooks () {
-        return bookRepository.getAllBooks();
+        return bookRepository.findAll();
     }
 
     @PostMapping
     public void addBook (@RequestBody Book book) {
-        bookRepository.addBook(book.getName());
+        bookRepository.save(book);
     }
 
     @DeleteMapping("{id}")
     public void deleteBookById (@PathVariable Long id) {
-        bookRepository.deleteBookById(id);
+        bookRepository.deleteById(id);
     }
 }

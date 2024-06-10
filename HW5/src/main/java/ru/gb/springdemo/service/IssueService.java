@@ -53,11 +53,13 @@ public class IssueService {
   }
 
   public List<Issue> getAllIssues () {
-    return issueRepository.getAllIssues();
+    return issueRepository.findAll();
   }
 
   public void returnBook (Long id) {
-    getIssueById(id).setReturned_at(LocalDateTime.now());
+    Issue issue = getIssueById(id);
+    issue.setReturnedAt(LocalDateTime.now());
+    issueRepository.save(issue);
   }
 
 }

@@ -25,7 +25,7 @@ public class ReaderController {
 
     @GetMapping()
     public List<Reader> getAllReaders () {
-        return readerRepository.getAllReaders();
+        return readerRepository.findAll();
     }
 
     @GetMapping("{id}/issue")
@@ -35,11 +35,11 @@ public class ReaderController {
 
     @PostMapping
     public void addReader (@RequestBody Reader reader) {
-        readerRepository.addReader(reader.getName());
+        readerRepository.save(reader);
     }
 
     @DeleteMapping("{id}")
     public void deleteReaderById (@PathVariable Long id) {
-        readerRepository.deleteReaderById(id);
+        readerRepository.deleteById(id);
     }
 }

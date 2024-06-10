@@ -27,21 +27,21 @@ public class SimpleController {
 
     @GetMapping("/books")
     public String getBooks (Model model) {
-        List<Book> books = bookRepository.getAllBooks();
+        List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
         return "books";
     }
 
     @GetMapping("/readers")
     public String getReaders (Model model) {
-        List<Reader> readers = readerRepository.getAllReaders();
+        List<Reader> readers = readerRepository.findAll();
         model.addAttribute("readers", readers);
         return "readers";
     }
 
     @GetMapping("/issues")
     public String getIssues (Model model) {
-        List<Issue> issues = issueRepository.getAllIssues();
+        List<Issue> issues = issueRepository.findAll();
         model.addAttribute("issues", issues);
         return "issues";
     }

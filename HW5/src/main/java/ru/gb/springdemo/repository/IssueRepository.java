@@ -1,51 +1,19 @@
 package ru.gb.springdemo.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.gb.springdemo.model.Issue;
+import ru.gb.springdemo.model.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class IssueRepository {
+public interface IssueRepository extends JpaRepository<Issue, Long> {
 
-  private final List<Issue> issues;
+  Issue getIssueById (Long id);
 
-  public IssueRepository() {
-    this.issues = new ArrayList<>();
-  }
+  List<Issue> getAllIssuesByReaderId (Long id);
 
-  public void save(Issue issue) {
-    // insert into ....
-    issues.add(issue);
-  }
-
-  public Issue getIssueById (Long id) {
-    return issues.stream().filter(it -> Objects.equals(it.getId(), id))
-            .findFirst()
-            .orElse(null);
-  }
-
-  public Issue getIssueByReaderId (Long id) {
-    return issues.stream()
-            .filter(it -> Objects.equals(it.getReaderId(), id))
-            .findFirst()
-            .orElse(null);
-  }
-
-  public List<Issue> getAllIssuesByReaderId (Long id) {
-    return issues.stream()
-            .filter(it -> Objects.equals(it.getReaderId(), id))
-            .toList();
-  }
-
-  public List<Issue> getAllIssues () {
-    return List.copyOf(issues);
-  }
-
-  public Boolean containsUserById(Long id) {
-    return issues.stream()
-            .anyMatch(it -> Objects.equals(it.getReaderId(), id) && it.getReturned_at() == null);
-  }
 }
