@@ -19,6 +19,8 @@ public class RunAfterStartup {
         bookRepository.save(new Book("метрвые души"));
         bookRepository.save(new Book("чистый код"));
 
-        readerRepository.save(new Reader("Игорь"));
+        readerRepository.save(new Reader("admin"));
+        readerRepository.save(new Reader("reader"));
+        readerRepository.save(new Reader("simple"));
     }
 }

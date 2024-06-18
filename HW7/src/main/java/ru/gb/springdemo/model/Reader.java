@@ -18,15 +18,34 @@ public class Reader {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Schema(name = "Идентификатор")
   private final long id;
+
   @Column(name = "name")
   @Schema(name = "Имя читателя")
   private final String name;
 
+  @Column(name = "login")
+  private final String login;
+
+  @Column(name = "password")
+  private final String password;
+
+  @Column(name = "role")
+  private final String role;
+
   public Reader() {
-    this(sequence++, "no name");
+    this(sequence++, "unknown", "unknown", "unknown", "unknown");
   }
 
   public Reader(String name) {
-    this(sequence++, name);
+    this(sequence++, name, name, name, name);
   }
+
+  public Reader(String name, String role) {
+    this(sequence++, name, name, name, role);
+  }
+
+  public Reader(String name, String login, String password, String role) {
+    this(sequence++, name, login, password, role);
+  }
+
 }

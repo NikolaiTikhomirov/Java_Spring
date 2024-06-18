@@ -53,4 +53,10 @@ public class SimpleController {
         model.addAttribute("reader", readerRepository.getReaderById(id));
         return "readerIssues";
     }
+
+    @GetMapping("/home")
+    public String getHomePage (Model model) {
+        model.addAttribute("home");
+        return "home";
+    }
 }
