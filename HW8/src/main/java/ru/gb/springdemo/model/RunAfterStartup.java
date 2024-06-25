@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import ru.gb.springdemo.aspect.RecoverException;
 import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
 

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.gb.springdemo.aspect.TimeCounter;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.model.Reader;
@@ -15,6 +16,7 @@ import ru.gb.springdemo.repository.ReaderRepository;
 
 import java.util.List;
 
+@TimeCounter
 @Controller
 @RequestMapping("/ui")
 public class SimpleController {
