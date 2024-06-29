@@ -1,8 +1,7 @@
-package ru.gb.springdemo.aspect;
+package ru.gb.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecoverExceptionAspect {
 
-    @Pointcut("@annotation(ru.gb.springdemo.aspect.RecoverException)")
+    @Pointcut("@annotation(ru.gb.aspect.RecoverException)")
     public void methodsAnnotatedWith() {
     }
 
@@ -37,8 +36,7 @@ public class RecoverExceptionAspect {
             return 0;
         }
         if (double.class.equals(signature.getMethod().getAnnotatedReturnType().getType())) {
-            log.info("double was returned with 0.0");
-            return 0.0;
+            log.info("double was returned with 0.0");return 0.0;
         }
         if (boolean.class.equals(signature.getMethod().getAnnotatedReturnType().getType())) {
             System.out.println("boolean was returned with false");
