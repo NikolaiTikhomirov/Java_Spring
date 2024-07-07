@@ -63,8 +63,8 @@ public class IssueController {
 
   @PutMapping("{issueId}")
   @Operation(summary = "return book", description = "Сделать запись о возврате книги")
-  public void returnBook (@PathVariable Long issueId) {
-    service.returnBook(issueId);
+  public Issue returnBook (@PathVariable Long issueId) {
+    return service.returnBook(issueId);
   }
 
 }

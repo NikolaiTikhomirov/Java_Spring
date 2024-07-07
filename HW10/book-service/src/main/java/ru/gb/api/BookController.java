@@ -30,8 +30,8 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "add book", description = "Добавить книгу")
-    public void addBook (@RequestBody Book book) {
-        bookRepository.save(book);
+    public Book addBook (@RequestBody Book book) {
+        return bookRepository.save(book);
     }
 
     @DeleteMapping("{id}")

@@ -98,10 +98,10 @@ public class IssueServ {
     return detailedListIssues;
   }
 
-  public void returnBook (Long id) {
+  public Issue returnBook (Long id) {
     Issue issue = getIssueById(id).getBody();
     issue.setReturnedAt(LocalDateTime.now());
-    issueRepository.save(issue);
+    return issueRepository.save(issue);
   }
 
 }

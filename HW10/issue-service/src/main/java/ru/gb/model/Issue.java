@@ -44,7 +44,7 @@ public class Issue {
     this.id = sequence++;
     this.bookId = 0L;
     this.readerId = 0L;
-    this.issuedAt = LocalDateTime.now();
+    this.issuedAt = LocalDateTime.now().withNano(0);
   }
 
   public Issue(long bookId, long readerId) {

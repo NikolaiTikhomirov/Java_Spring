@@ -60,8 +60,8 @@ public class ReaderController {
 
     @PostMapping
     @Operation(summary = "add reader", description = "Добавить пользователя")
-    public void addReader (@RequestBody Reader reader) {
-        readerRepository.save(reader);
+    public Reader addReader (@RequestBody Reader reader) {
+        return readerRepository.save(reader);
     }
 
     @DeleteMapping("{id}")
